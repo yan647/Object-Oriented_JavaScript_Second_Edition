@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第二章：基本数据类型、数组、循环及条件表达式</title>
+</head>
+<body>
+	<section>
+		<h1>基本数据类型：</h1>
+		<ul>
+			<li>数字Number</li>
+			<li>字符串String</li>
+			<li>布尔值Boolean</li>
+			<li>undefined</li>
+			<li>Null</li>
+		</ul>
+	</section>
+
+	<section>
+		<h1>双重取反操作：可以将任何值转换为相应的布尔值</h1>
+		<ul>
+			<li>falsy值：空字符串""，null，undefined，数字0，数字NaN，布尔值false</li>
+			<li>其他值为truthy值</li>
+		</ul>
+	</section>
+
+	<section>
+		<h1>数组： http://gold.xitu.io/post/581cb1d28ac247004fe90886</h1>
+		<p>数组是无类型的，动态的，可能是稀疏的，</p>
+		<p>数组直接量中的值不一定是常量，可以是任意表达式，也可以包含对象直接量或其他数组直接量</p>
+		<p>数组是对象的特殊形式</p>
+		<p>足够稀疏的数组在实现上比稠密数组更慢、内存利用率更高，在这样的数组中查找元素的时间跟常规对象属性的查找时间一样长</p>
+	</section>
+</body>
+<script type="text/javascript">
+    //ES6中新增的
+	var a=0o10;//八进制
+	var b=0b10;//二进制
+	console.log(a);
+	console.log(b);
+
+	//指数表示法
+	2e+3;
+	2e3;
+	2e-3;
+
+	//表示最大数，比最大的数还大
+	typeof Infinity;
+	1/0;
+	Infinity-Infinity;
+
+	NaN;//不是数字
+	typeof NaN;
+	1+2+NaN;//NaN具有传染性
+
+	var s='100';
+	typeof s;
+	s=s*1;
+	typeof s;//将数字字符串转换为数字的方法：将该字符串与1相乘
+	var n=1;
+	typeof n;
+	n=''+n;
+	typeof n;//将其他类型转换成字符串的方法：将其余空字符串相加
+
+	true||false||true||false;//惰性求值
+	true&&"something";//如果JS引擎在一个逻辑表达式中遇到一个非布尔类型的操作数，则该操作数的值会成为该表达式所返回的结果
+
+	var mynum=mynum||10;//当我们不能确定某个变量是否已经被定义时，可以这样写，即如果变量mynum已经被定义了，就保留其原值，否则就初始化为10
+
+	var mynumber=0;
+	var mynumber=mynumber||10;
+	mynumber;//
+
+	NaN==NaN;
+	var i=1+undefined;
+	i;
+	var i=1+null;
+	i;
+	1*undefined;
+	1*null;
+
+	a=[1,2,3];
+	Object.defineProperty(a,'length',{writable:false});//ES5中，用其将length属性变成只读的
+	a.length=0;
+	a.length;
+	delete a[1];//delete不会修改数组的length属性，只是变成了稀疏数组
+	a;
+
+	//数组遍历  for forEach for-in for-of
+	for(var i=0;i<a.length;i++){
+		if(!a[i]) continue;//跳过null,undefined和不存在的元素
+		if(!(i in a)) continue;//跳过不存在的元素
+		if(a[i]===undefined) continue;//跳过undefined和不存在的元素
+	}
+	for(var i in a){
+		if(!a.hasOwnProperty(i)) continue;//跳过集成的属性
+		if(String(Math.floor(Math.abs(Number(i))))!==i) continue;//跳过不是非负整数的i
+	}
+</script>
+</html>
